@@ -15,8 +15,6 @@ ActiveRecord::Schema.define(version: 2020_01_14_225152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
-  enable_extension "postgis"
-  enable_extension "postgis_topology"
 
   create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
     t.string "auth_name", limit: 256
