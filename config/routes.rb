@@ -4,5 +4,6 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
   root to: "home#index"
+  resources :events
 end
 

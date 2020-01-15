@@ -10,17 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_14_225152) do
+ActiveRecord::Schema.define(version: 2020_01_15_153621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "hstore"
   enable_extension "plpgsql"
 
-  create_table "spatial_ref_sys", primary_key: "srid", id: :integer, default: nil, force: :cascade do |t|
-    t.string "auth_name", limit: 256
-    t.integer "auth_srid"
-    t.string "srtext", limit: 2048
-    t.string "proj4text", limit: 2048
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.datetime "date"
+    t.string "description"
+  end
+
+  create_table "issues", force: :cascade do |t|
+    t.string "title"
+    t.bigint "event_id"
+    t.index ["event_id"], name: "index_issues_on_event_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,4 +45,5 @@ ActiveRecord::Schema.define(version: 2020_01_14_225152) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "issues", "events"
 end
