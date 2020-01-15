@@ -22,7 +22,7 @@ class Event {
     let is = this.issues
     let issueTitleString = ''
     for (let i = 0; i < is.length; i++) {
-      issueTitleString += `<li>${is[i].title}</li>`
+      issueTitleString += `<li id="issue-item">${is[i].title}</li>`
     }
     return issueTitleString
   }
