@@ -1,40 +1,29 @@
-// class Event {
-//   constructor(title, date, description) {
-//     this.title = title
-//     this.date = date
-//     this.description = description
-//     this.fetchEvents
-//     this.render
-//   }
-
-//   get fetchEvents() {
-//     fetch('http://localhost:3000/events')
-//     .then(
-//       function(response) {
-//         return response.json()
-//       }
-//     ).then(function(json) {
-//       populatePageWithEvents(json)
-//     })
-//   }
-  
-//   populatePageWithEvents() {
-//     let eventContainer = document.querySelector('.all-events')
-//     console.log('hi')
-//   }
-
-//   get render() {
-//     let eventContainer = document.querySelector('.all-events')
-//     eventContainer.innerHTML += 'hi'
-//   }
-// }
-
 class Event {
-  constructor(title, date, description) {
-    this.title = title
-    this.date = date
-    this.description = description
-    this.fetchEvents
-    this.render
+  constructor(json) {
+    this.id = json.id
+    this.title = json.title
+    this.date = json.date
+    this.description = json.description
+    this.issues = json.issues
+  }
+
+  get renderLi() {
+    return `
+      <li id="${this.id}">${this.title}
+        <input type="button" value="delete" class="delete" id=${this.id}>
+        <ul>
+        <li>${this.issueTitles}</li>
+        </ul>
+      </li>
+    `
+  }
+
+  get issueTitles() {
+    let is = this.issues
+    let issueTitleString = ''
+    for (let i = 0; i < is.length; i++) {
+      issueTitleString += `<li>${is[i].title}</li>`
+    }
+    return issueTitleString
   }
 }

@@ -11,5 +11,5 @@ User.create(email: "b@example.com", password: ENV['B_USER_PASS'],password_confir
 @o1 = Event.create(title: 'outing 1', date:'2020-01-14')
 @o2 = Event.create(title: 'outing 2', date:'2020-02-29')
 
-@i1 = Issue.new(title: 'outing 1 issue title', event_id: @o1.id)
-@i2 = Issue.new(title: 'outing 2 issue title', event_id: @o2.id)
+@i1 = Issue.create(title: 'outing 1 issue title', event_id: @o1.id)
+@i2 = Issue.create(title: 'outing 2 issue title', event_id: @o2.id)

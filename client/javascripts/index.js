@@ -1,1 +1,2 @@
-const event = new Event
+// const event = new Event
+const app = new App
