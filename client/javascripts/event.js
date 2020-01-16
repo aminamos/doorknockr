@@ -12,6 +12,7 @@ class Event {
       return `
       <li class="${this.title}" id="${this.id}">${this.title}
         <input type="button" value="delete" class="delete" id=${this.id}>
+        
       </li>
     `
     } else {
