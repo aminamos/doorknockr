@@ -1,17 +1,9 @@
 class Events {
   constructor() {
     this.events = []
-    this.a = 'lolol'
     this.adapter = new EventsAdapter()
     this.convenientStuffGoesHere()
     this.fetchAndLoadEvents()
-  }
-
-  populateDropdown() {
-    let dropdownMenu = document.querySelector('.dropdown-menu')
-    let a = document.createElement('a')
-    a.className = 'dropdown-item'
-    console.log(this.events)
   }
 
   convenientStuffGoesHere() {
@@ -36,35 +28,56 @@ class Events {
     this.adapter.createEvent(titleValue,dateValue,descriptionValue)
     .then(event => {
       this.events.push(new Event(event))
+      this.popDropdownPostCreate(event)
+      // console.log(event)
       this.render()
     })
     this.formTitle.value = ''
     this.formDate.value = ''
     this.formDescription.value = ''
+    // this.popDropdown(this.events)
   }
 
   createIssue(e) {
     e.preventDefault()
-    // let this.issueEvent = document.getElementById('')
     let issueTitle = this.issueTitle.value
-    let issueEventId = this.issueId.value
+    let issueId = this.issueId.value
+    
+    this.adapter.createIssue(issueTitle,issueId)
+    .then(event => {
+      this.reRender()
+    })
+  }
 
-    // console.log(issueTitle,issueEventId)
-    // a.setAttribute('eventJSON',)
+  popDropdown(events) {
+    let dropdownMenu = document.querySelector('.custom-select')
+    for (let i = 0; i < events.length; i++) {
+      let a = document.createElement('option')
+      a.value = events[i].title
+      a.id = events[i].id
+      a.innerText = events[i].title
+      dropdownMenu.appendChild(a)
+    }
+  }
+
+  popDropdownPostCreate(event) {
+    let dropdownMenu = document.querySelector('.custom-select')
+    let a = document.createElement('option')
+    a.value = event.title
+    a.id = event.id
+    a.innerText = event.title
+    dropdownMenu.appendChild(a)
+  }
+
+  deleteDropdownOption() {
+    
   }
   
   fetchAndLoadEvents() {
     this.adapter
     .getEvents()
     .then(events => {
-      let dropdownMenu = document.querySelector('.custom-select')
-      for (let i = 0; i < events.length; i++) {
-        let a = document.createElement('option')
-        a.value = events[i].title
-        a.id = events[i].id
-        a.innerText = events[i].title
-        dropdownMenu.appendChild(a)
-      }
+      this.popDropdown(events)
       events.forEach(event => this.events.push(new Event(event)))
     })
     .then(
@@ -82,7 +95,10 @@ class Events {
         let eventID = e.target.id
         this.adapter.deleteEvent(eventID)
         this.events.pop()
-        this.reRender()
+        e.target.parentNode.remove()
+        let dropdownMenu = document.querySelector('.custom-select')
+        let newestItem = dropdownMenu[dropdownMenu.children.length-1]
+        newestItem.remove()
       }.bind(this))
     }
   }

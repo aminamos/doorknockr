@@ -21,9 +21,14 @@ class Event {
   get issueTitles() {
     let is = this.issues
     let issueTitleString = ''
-    for (let i = 0; i < is.length; i++) {
-      issueTitleString += `<li id="issue-item">${is[i].title}</li>`
+    
+    if (is == undefined) {
+      return ''
+    } else {
+      for (let i = 0; i < is.length; i++) {
+        issueTitleString += `<li id="issue-item">${is[i].title}</li>`
+      }
+      return issueTitleString
     }
-    return issueTitleString
   }
 }

@@ -30,6 +30,24 @@ class EventsAdapter {
     .then(res => res.json())
   }
 
+  createIssue(issueTitle,issueId) {
+    let eventObj = {
+      title: issueTitle,
+      event_title: issueId
+    }
+
+    let configObj = {
+      method: 'POST',
+      body: JSON.stringify(eventObj),
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      }
+    }
+    return fetch('http://localhost:3000/issues',configObj)
+    .then(res => res.json())
+  }
+
   deleteEvent(id) {
     let eventObj = {
       id: id
@@ -43,7 +61,7 @@ class EventsAdapter {
         Accept: 'application/json'
       }
     }
-    return fetch(this.baseURL + `/${id}`,configObj)
+    fetch(this.baseURL + `/${id}`,configObj)
     .then(res => res.json())
   }
 }

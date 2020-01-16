@@ -5,7 +5,8 @@ class IssuesController < ApplicationController
   end
 
   def create
-    @issue = Issue.create(issue_params)
+    @event = Event.find_by(title: params[:event_title])
+    @issue = Issue.create(title: params[:title], event_id: @event.id)
     render json: @issue
   end
 
@@ -29,6 +30,6 @@ class IssuesController < ApplicationController
 
   private
   def issue_params
-    params.require(:issue).permit(:title, :event_id)
+    params.require(:issue).permit(:title)
   end
 end
