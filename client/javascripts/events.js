@@ -56,6 +56,8 @@ class Events {
         relatedEvent.appendChild(ul)
       })
     }
+    this.issueTitle.value = ''
+    e.srcElement.elements[1].value = 'Click to choose an event'
   }
 
   popDropdown(events) {
