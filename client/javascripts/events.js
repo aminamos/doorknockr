@@ -29,13 +29,11 @@ class Events {
     .then(event => {
       this.events.push(new Event(event))
       this.popDropdownPostCreate(event)
-      // console.log(event)
       this.render()
     })
     this.formTitle.value = ''
     this.formDate.value = ''
     this.formDescription.value = ''
-    // this.popDropdown(this.events)
   }
 
   createIssue(e) {
@@ -67,10 +65,6 @@ class Events {
     a.id = event.id
     a.innerText = event.title
     dropdownMenu.appendChild(a)
-  }
-
-  deleteDropdownOption() {
-    
   }
   
   fetchAndLoadEvents() {
