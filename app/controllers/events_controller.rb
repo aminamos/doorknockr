@@ -22,10 +22,10 @@ class EventsController < ApplicationController
 
   def destroy
     @event = Event.find(params[:id])
-    @issue = Issue.find_by(event_id: @event.id)
-    if @issue
-      @issue.delete
+    Issue.where(event_id: @event.id).each do |issue|
+      issue.delete
     end
+    
     @event.delete
     @events = Event.all
 

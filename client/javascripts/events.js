@@ -43,6 +43,7 @@ class Events {
     
     this.adapter.createIssue(issueTitle,issueId)
     .then(event => {
+      // this.reRender()
       this.reRender()
     })
   }
