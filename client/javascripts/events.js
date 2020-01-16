@@ -56,12 +56,8 @@ class Events {
           ul.appendChild(newIssueNode)
           relatedEvent.appendChild(ul)
         } else {
-          // relatedEvent.appendChild(newIssueNode)
           relatedEvent.getElementsByTagName('ul')[0].appendChild(newIssueNode)
         }
-        console.log(relatedEvent)
-        console.log(relatedEvent.children)
-        console.log(relatedEvent.children.length)
       })
     }
     this.issueTitle.value = ''
