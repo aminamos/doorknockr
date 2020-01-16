@@ -11,7 +11,7 @@ class EventsAdapter {
     )
   }
 
-  createNote(title,date,description) {
+  createEvent(title,date,description) {
     let eventObj = {
       title: title,
       date: date,
