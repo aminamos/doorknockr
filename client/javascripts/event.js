@@ -9,10 +9,10 @@ class Event {
 
   get renderLi() {
     return `
-      <li id="${this.id}">${this.title}
+      <li class="${this.title}" id="${this.id}">${this.title}
         <input type="button" value="delete" class="delete" id=${this.id}>
         <ul>
-        <li>${this.issueTitles}</li>
+        ${this.issueTitles}
         </ul>
       </li>
     `

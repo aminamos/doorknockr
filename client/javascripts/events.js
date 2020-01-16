@@ -43,8 +43,14 @@ class Events {
     
     this.adapter.createIssue(issueTitle,issueId)
     .then(event => {
-      // this.reRender()
-      this.reRender()
+      e = this.events
+      let lastEvent = e[e.length-1]
+      let newIssueNode = document.createElement('li')
+      newIssueNode.innerText = lastEvent.title
+      newIssueNode.id = 'issue-item'
+      // let relatedEvent = document.getElementById(lastEvent.title)
+      console.log(relatedEvent)
+      // relatedEvent.appendChild(newIssueNode)
     })
   }
 
@@ -52,7 +58,6 @@ class Events {
     let dropdownMenu = document.querySelector('.custom-select')
     for (let i = 0; i < events.length; i++) {
       let a = document.createElement('option')
-      a.value = events[i].title
       a.id = events[i].id
       a.innerText = events[i].title
       dropdownMenu.appendChild(a)
