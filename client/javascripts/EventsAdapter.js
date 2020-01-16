@@ -1,22 +1,18 @@
 class EventsAdapter {
   constructor() {
-    this.baseURL = 'http://localhost:3000/events'
+    this.baseURL = 'http://localhost:3000/events';
   }
 
   getEvents() {
-    return fetch(
-      this.baseURL
-    ).then(
-      res => res.json()
-    )
+    return fetch(this.baseURL).then(res => res.json());
   }
 
-  createEvent(title,date,description) {
+  createEvent(title, date, description) {
     let eventObj = {
       title: title,
       date: date,
       description: description
-    }
+    };
 
     let configObj = {
       method: 'POST',
@@ -25,16 +21,15 @@ class EventsAdapter {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       }
-    }
-    return fetch(this.baseURL,configObj)
-    .then(res => res.json())
+    };
+    return fetch(this.baseURL, configObj).then(res => res.json());
   }
 
-  createIssue(issueTitle,issueId) {
+  createIssue(issueTitle, issueId) {
     let eventObj = {
       title: issueTitle,
       event_title: issueId
-    }
+    };
 
     let configObj = {
       method: 'POST',
@@ -43,15 +38,16 @@ class EventsAdapter {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       }
-    }
-    return fetch('http://localhost:3000/issues',configObj)
-    .then(res => res.json())
+    };
+    return fetch('http://localhost:3000/issues', configObj).then(res =>
+      res.json()
+    );
   }
 
   deleteEvent(id) {
     let eventObj = {
       id: id
-    }
+    };
 
     let configObj = {
       method: 'DELETE',
@@ -60,8 +56,7 @@ class EventsAdapter {
         'Content-Type': 'application/json',
         Accept: 'application/json'
       }
-    }
-    fetch(this.baseURL + `/${id}`,configObj)
-    .then(res => res.json())
+    };
+    fetch(this.baseURL + `/${id}`, configObj).then(res => res.json());
   }
 }

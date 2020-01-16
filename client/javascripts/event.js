@@ -1,10 +1,10 @@
 class Event {
   constructor(json) {
-    this.id = json.id
-    this.title = json.title
-    this.date = json.date
-    this.description = json.description
-    this.issues = json.issues
+    this.id = json.id;
+    this.title = json.title;
+    this.date = json.date;
+    this.description = json.description;
+    this.issues = json.issues;
   }
 
   get renderLi() {
@@ -14,7 +14,7 @@ class Event {
         <input type="button" value="delete" class="delete" id=${this.id}>
         
       </li>
-    `
+    `;
     } else {
       return `
       <li class="${this.title}" id="${this.id}">${this.title}
@@ -23,21 +23,21 @@ class Event {
         ${this.issueTitles}
         </ul>
       </li>
-    `
+    `;
     }
   }
 
   get issueTitles() {
-    let is = this.issues
-    let issueTitleString = ''
-    
+    let is = this.issues;
+    let issueTitleString = '';
+
     if (is == undefined) {
-      return ''
+      return '';
     } else {
       for (let i = 0; i < is.length; i++) {
-        issueTitleString += `<li id="issue-item">${is[i].title}</li>`
+        issueTitleString += `<li id="issue-item">${is[i].title}</li>`;
       }
-      return issueTitleString
+      return issueTitleString;
     }
   }
 }
