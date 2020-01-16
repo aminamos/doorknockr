@@ -40,18 +40,22 @@ class Events {
     e.preventDefault()
     let issueTitle = this.issueTitle.value
     let issueId = this.issueId.value
-    
-    this.adapter.createIssue(issueTitle,issueId)
-    .then(event => {
-      e = this.events
-      let lastEvent = e[e.length-1]
-      let newIssueNode = document.createElement('li')
-      newIssueNode.innerText = lastEvent.title
-      newIssueNode.id = 'issue-item'
-      // let relatedEvent = document.getElementById(lastEvent.title)
-      console.log(relatedEvent)
-      // relatedEvent.appendChild(newIssueNode)
-    })
+    if (e.srcElement.elements[1].value == '' || issueTitle == '') {
+      console.log('submit the form with all information')
+    } else {
+      this.adapter.createIssue(issueTitle,issueId)
+      .then(event => {
+        e = this.events
+        let lastEvent = e[e.length-1]
+        let newIssueNode = document.createElement('li')
+        newIssueNode.innerText = event.title
+        newIssueNode.id = 'issue-item'
+        let relatedEvent = document.querySelector(`.${lastEvent.title}`)
+        let ul = document.createElement('ul')
+        ul.appendChild(newIssueNode)
+        relatedEvent.appendChild(ul)
+      })
+    }
   }
 
   popDropdown(events) {

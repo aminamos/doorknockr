@@ -8,7 +8,14 @@ class Event {
   }
 
   get renderLi() {
-    return `
+    if (this.issueTitles == '') {
+      return `
+      <li class="${this.title}" id="${this.id}">${this.title}
+        <input type="button" value="delete" class="delete" id=${this.id}>
+      </li>
+    `
+    } else {
+      return `
       <li class="${this.title}" id="${this.id}">${this.title}
         <input type="button" value="delete" class="delete" id=${this.id}>
         <ul>
@@ -16,6 +23,7 @@ class Event {
         </ul>
       </li>
     `
+    }
   }
 
   get issueTitles() {
