@@ -39,11 +39,7 @@ class EventsAdapter {
         Accept: 'application/json'
       }
     };
-    return fetch('http://localhost:3000/issues', configObj).then(function(
-      response
-    ) {
-      return response.json();
-    });
+    return fetch('http://localhost:3000/issues', configObj).then(res => res.json());
   }
 
   deleteEvent(id) {
