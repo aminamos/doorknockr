@@ -10,14 +10,14 @@ class Event {
   get renderLi() {
     if (this.issueTitles == '') {
       return `
-      <li class="${this.title}" id="${this.id}">${this.title}
+      <li class="list-${this.title}" id="${this.id}">${this.title}
         <input type="button" value="delete" class="delete" id=${this.id}>
         
       </li>
     `;
     } else {
       return `
-      <li class="${this.title}" id="${this.id}">${this.title}
+      <li class="list-${this.id}" id="${this.id}">${this.title}
         <input type="button" value="delete" class="delete" id=${this.id}>
         <ul>
         ${this.issueTitles}

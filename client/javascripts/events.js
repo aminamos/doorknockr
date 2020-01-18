@@ -19,6 +19,10 @@ class Events {
     this.newIssueForm.addEventListener('submit', this.createIssue.bind(this));
   }
 
+  get showEventsArray() {
+    return this.events
+  }
+
   createEvent(e) {
     e.preventDefault();
     let titleValue = this.formTitle.value;
@@ -44,21 +48,28 @@ class Events {
     if (e.srcElement.elements[1].value == '' || issueTitle == '') {
       console.log('submit the form with all information');
     } else {
-      this.adapter.createIssue(issueTitle, issueId).then(event => {
-        e = this.events;
-        let lastEvent = e[e.length - 1];
-        let newIssueNode = document.createElement('li');
-        newIssueNode.innerText = event.title;
-        newIssueNode.id = 'issue-item';
-        let relatedEvent = document.querySelector(`.${lastEvent.title}`);
-        let ul = document.createElement('ul');
-        if (relatedEvent.children.length == 1) {
-          ul.appendChild(newIssueNode);
-          relatedEvent.appendChild(ul);
-        } else {
-          relatedEvent.getElementsByTagName('ul')[0].appendChild(newIssueNode);
-        }
-      });
+      this.adapter.createIssue(this.issueTitle.value, this.issueId.value)
+      .then(function(response) {
+          let thisEvents
+          thisEvents = this.events
+          let lastEvent
+          lastEvent = thisEvents[thisEvents.length - 1];
+          let newIssueNode
+          newIssueNode = document.createElement('li');
+          newIssueNode.innerText = response.title;
+          newIssueNode.id = 'issue-item';
+          let relatedEvent
+          relatedEvent = document.querySelector(`.list-${lastEvent.id}`);
+          let ul = document.createElement('ul');
+          if (relatedEvent.children.length == 1) {
+            ul.appendChild(newIssueNode);
+            relatedEvent.appendChild(ul);
+          } else {
+            relatedEvent.getElementsByTagName('ul')[0].appendChild(newIssueNode);
+          }
+      
+      }.bind(this))
+      
     }
     this.issueTitle.value = '';
     e.srcElement.elements[1].value = 'Click to choose an event';
