@@ -20,7 +20,7 @@ class Events {
   }
 
   get showEventsArray() {
-    return this.events
+    return this.events;
   }
 
   createEvent(e) {
@@ -48,29 +48,29 @@ class Events {
     if (e.srcElement.elements[1].value == '' || issueTitle == '') {
       console.log('submit the form with all information');
     } else {
-      this.adapter.createIssue(this.issueTitle.value, this.issueId.value)
-      .then(function(response) {
-          let thisEvents
-          thisEvents = this.events
-          let lastEvent
+      this.adapter.createIssue(this.issueTitle.value, this.issueId.value).then(
+        function(response) {
+          let thisEvents;
+          thisEvents = this.events;
+          let lastEvent;
           lastEvent = thisEvents[thisEvents.length - 1];
-          let newIssueNode
+          let newIssueNode;
           newIssueNode = document.createElement('li');
           newIssueNode.innerText = response.title;
           newIssueNode.id = 'issue-item';
-          let relatedEvent
+          let relatedEvent;
           relatedEvent = document.querySelector(`.list-${lastEvent.id}`);
           let ul = document.createElement('ul');
-          debugger
           if (relatedEvent.children.length == 1) {
             ul.appendChild(newIssueNode);
             relatedEvent.appendChild(ul);
           } else {
-            relatedEvent.getElementsByTagName('ul')[0].appendChild(newIssueNode);
+            relatedEvent
+              .getElementsByTagName('ul')[0]
+              .appendChild(newIssueNode);
           }
-      
-      }.bind(this))
-      
+        }.bind(this)
+      );
     }
     this.issueTitle.value = '';
     e.srcElement.elements[1].value = 'Click to choose an event';
