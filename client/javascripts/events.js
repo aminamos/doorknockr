@@ -61,6 +61,7 @@ class Events {
           let relatedEvent
           relatedEvent = document.querySelector(`.list-${lastEvent.id}`);
           let ul = document.createElement('ul');
+          debugger
           if (relatedEvent.children.length == 1) {
             ul.appendChild(newIssueNode);
             relatedEvent.appendChild(ul);
