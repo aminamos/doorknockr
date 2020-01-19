@@ -52,20 +52,22 @@ class Events {
         function(response) {
           let thisEvents;
           thisEvents = this.events;
-          let lastEvent;
-          lastEvent = thisEvents[thisEvents.length - 1];
+          // debugger
+          let relevantEvent
+          relevantEvent = thisEvents.filter(event => event.id == response.event_id)[0]
+          relevantEvent.issues.push(new Issue(response));
           let newIssueNode;
           newIssueNode = document.createElement('li');
           newIssueNode.innerText = response.title;
           newIssueNode.id = 'issue-item';
-          let relatedEvent;
-          relatedEvent = document.querySelector(`.list-${lastEvent.id}`);
+          let relatedEventHTML;
+          relatedEventHTML = document.querySelector(`.list-${relevantEvent.id}`);
           let ul = document.createElement('ul');
-          if (relatedEvent.children.length == 1) {
+          if (relatedEventHTML.children.length == 1) {
             ul.appendChild(newIssueNode);
-            relatedEvent.appendChild(ul);
+            relatedEventHTML.appendChild(ul);
           } else {
-            relatedEvent
+            relatedEventHTML
               .getElementsByTagName('ul')[0]
               .appendChild(newIssueNode);
           }

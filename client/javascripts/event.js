@@ -4,7 +4,13 @@ class Event {
     this.title = json.title;
     this.date = json.date;
     this.description = json.description;
-    this.issues = json.issues;
+    // this.issues = json.issues;
+    // this.issues = [];
+    if (json.issues != undefined) {
+      this.issues = json.issues
+    } else {
+      this.issues = [];
+    }
   }
 
   get renderLi() {
@@ -30,8 +36,8 @@ class Event {
   get issueTitles() {
     let is = this.issues;
     let issueTitleString = '';
-
-    if (is == undefined) {
+    // debugger
+    if (is.length <= 0) {
       return '';
     } else {
       for (let i = 0; i < is.length; i++) {
