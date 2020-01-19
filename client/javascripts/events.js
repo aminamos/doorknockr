@@ -83,6 +83,7 @@ class Events {
     for (let i = 0; i < events.length; i++) {
       let a = document.createElement('option');
       a.id = events[i].id;
+      a.className = `dd-${a.id}`
       a.innerText = events[i].title;
       dropdownMenu.appendChild(a);
     }
@@ -93,6 +94,7 @@ class Events {
     let a = document.createElement('option');
     a.value = event.title;
     a.id = event.id;
+    a.className = `dd-${a.id}`
     a.innerText = event.title;
     dropdownMenu.appendChild(a);
   }
@@ -120,11 +122,11 @@ class Events {
         function(e) {
           let eventID = e.target.id;
           this.adapter.deleteEvent(eventID);
-          this.events.pop();
+          this.events = this.events.filter(event => event.id != e.target.id)
           e.target.parentNode.remove();
           let dropdownMenu = document.querySelector('.custom-select');
-          let newestItem = dropdownMenu[dropdownMenu.children.length - 1];
-          newestItem.remove();
+          let eventTitleDropdown = document.querySelector(`.dd-${e.target.id}`)
+          eventTitleDropdown.remove()
         }.bind(this)
       );
     }
