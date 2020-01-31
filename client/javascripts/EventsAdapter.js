@@ -7,7 +7,7 @@ class EventsAdapter {
     return fetch(this.baseURL).then(res => res.json());
   }
 
-  createEvent(title, date, description) {
+  createEventWithAPI(title, date, description) {
     let eventObj = {
       title: title,
       date: date,
@@ -25,7 +25,7 @@ class EventsAdapter {
     return fetch(this.baseURL, configObj).then(res => res.json());
   }
 
-  showEvent(eventId) {
+  showEventAPI(eventId) {
     return fetch(`${this.baseURL}/${eventId}`).then(res => res.json());
   }
 

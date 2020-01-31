@@ -7,38 +7,39 @@ class Events {
   }
 
   showEvent = eventID => {
-    this.adapter.showEvent(eventID)
+    this.adapter.showEventAPI(eventID)
     .then(obj => {
       let box = document.querySelector('.show-page')
       box.innerHTML = '<h3>View one event</h3><button class="clear-show-section">Clear Show Section</button>'
       box.innerHTML += `<br>Event title: ${obj.title}<br>`
-      for (let i=0;i<obj.issues.length;i++) {
+      for (let i = 0;i < obj.issues.length; i++) {
         box.innerHTML += `Issue title: ${obj.issues[i].title}<br>`
       }
     })
   }
-  
+
   convenientStuffGoesHere() {
     this.eventsContainer = document.querySelector('.events-container');
     this.formTitle = document.getElementById('form-title');
     this.formDate = document.getElementById('form-date');
     this.formDescription = document.getElementById('form-description');
     this.newEventForm = document.getElementById('new-event-form');
-    this.newEventForm.addEventListener('submit', this.createEvent.bind(this));
+    this.newEventForm.addEventListener('submit', this.createEventWithForm.bind(this));
     this.issueTitle = document.getElementById('issue-form-title');
     this.issueId = document.querySelector('.custom-select');
     this.newIssueForm = document.getElementById('new-issue-form');
     this.newIssueForm.addEventListener('submit', this.createIssue.bind(this));
+    
   }
 
-  createEvent(e) {
+  createEventWithForm(e) {
     e.preventDefault();
     let titleValue = this.formTitle.value;
     let dateValue = this.formDate.value;
     let descriptionValue = this.formDescription.value;
 
     this.adapter
-      .createEvent(titleValue, dateValue, descriptionValue)
+      .createEventWithAPI(titleValue, dateValue, descriptionValue)
       .then(event => {
         this.events.push(new Event(event));
         this.popDropdownPostCreate(event);
@@ -70,12 +71,13 @@ class Events {
           let relatedEventHTML;
           relatedEventHTML = document.querySelector(`.list-${relevantEvent.id}`);
           let ul = document.createElement('ul');
-          if (relatedEventHTML.children.length == 1) {
+          if (relatedEventHTML.getElementsByTagName('ul').length < 1) {
             ul.appendChild(newIssueNode);
             relatedEventHTML.appendChild(ul);
+          } else if (relatedEventHTML.getElementsByTagName('ul').length >= 1) {
+            relatedEventHTML.getElementsByTagName('ul')[0].appendChild(newIssueNode);
           } else {
-            relatedEventHTML
-              .getElementsByTagName('ul')[0].appendChild(newIssueNode);
+            console.log('very bad situation')
           }
         }.bind(this)
       );
