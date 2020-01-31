@@ -10,9 +10,8 @@ class Events {
     this.adapter.showEvent(eventID)
     .then(obj => {
       let box = document.querySelector('.show-page')
-      box.innerHTML = ''
-      console.log(obj.issues)
-      box.innerHTML += `Event title: ${obj.title}<br>`
+      box.innerHTML = '<h3>View one event</h3><button class="clear-show-section">Clear Show Section</button>'
+      box.innerHTML += `<br>Event title: ${obj.title}<br>`
       for (let i=0;i<obj.issues.length;i++) {
         box.innerHTML += `Issue title: ${obj.issues[i].title}<br>`
       }
