@@ -25,6 +25,10 @@ class EventsAdapter {
     return fetch(this.baseURL, configObj).then(res => res.json());
   }
 
+  showEvent(eventId) {
+    return fetch(`${this.baseURL}/${eventId}`).then(res => res.json());
+  }
+
   createIssue(issueTitle, issueId) {
     let eventObj = {
       title: issueTitle,

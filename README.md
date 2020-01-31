@@ -1,3 +1,7 @@
+// make a call to one object that has a nested array in it, iterate through the nested array to show to a user
+// make a call to the show page instead of the index
+// list out how each requirement is fulfilled
+
 # Doorknockr
 
 This application was created for a project assigned as part of my studies with [Flatiron School](https://flatironschool.com/). It's a simple app that political campaigns could use to create canvassing (doorknocking) events, and associated issues/topics for those events.

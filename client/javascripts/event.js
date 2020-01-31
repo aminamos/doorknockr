@@ -4,8 +4,6 @@ class Event {
     this.title = json.title;
     this.date = json.date;
     this.description = json.description;
-    // this.issues = json.issues;
-    // this.issues = [];
     if (json.issues != undefined) {
       this.issues = json.issues
     } else {
@@ -17,6 +15,7 @@ class Event {
     if (this.issueTitles == '') {
       return `
       <li class="list-${this.id}" id="${this.id}">${this.title}
+        <input type="button" value="view" class="view" id=${this.id}>
         <input type="button" value="delete" class="delete" id=${this.id}>
         
       </li>
@@ -24,6 +23,7 @@ class Event {
     } else {
       return `
       <li class="list-${this.id}" id="${this.id}">${this.title}
+        <input type="button" value="view" class="view" id=${this.id}>
         <input type="button" value="delete" class="delete" id=${this.id}>
         <ul>
         ${this.issueTitles}
@@ -36,7 +36,7 @@ class Event {
   get issueTitles() {
     let is = this.issues;
     let issueTitleString = '';
-    // debugger
+    
     if (is.length <= 0) {
       return '';
     } else {

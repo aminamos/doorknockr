@@ -6,4 +6,18 @@
   margin: auto;
   width: 70%;
   border: 1px dotted darkviolet;
+  position: relative;
+}
+
+.show-page {
+  border: 1px dotted black;
+  /* position: relative; */
+  /* right: 0;
+  bottom: 0; */
+  /* right: 10px;
+  height: 180px;
+  width: 80px; */
+  margin: auto;
+  width: 70%;
+  /* height:auto; */
 }

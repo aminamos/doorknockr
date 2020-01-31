@@ -6,6 +6,19 @@ class Events {
     this.fetchAndLoadEvents();
   }
 
+  showEvent = eventID => {
+    this.adapter.showEvent(eventID)
+    .then(obj => {
+      let box = document.querySelector('.show-page')
+      box.innerHTML = ''
+      console.log(obj.issues)
+      box.innerHTML += `Event title: ${obj.title}<br>`
+      for (let i=0;i<obj.issues.length;i++) {
+        box.innerHTML += `Issue title: ${obj.issues[i].title}<br>`
+      }
+    })
+  }
+  
   convenientStuffGoesHere() {
     this.eventsContainer = document.querySelector('.events-container');
     this.formTitle = document.getElementById('form-title');
@@ -17,10 +30,6 @@ class Events {
     this.issueId = document.querySelector('.custom-select');
     this.newIssueForm = document.getElementById('new-issue-form');
     this.newIssueForm.addEventListener('submit', this.createIssue.bind(this));
-  }
-
-  get showEventsArray() {
-    return this.events;
   }
 
   createEvent(e) {
@@ -52,7 +61,6 @@ class Events {
         function(response) {
           let thisEvents;
           thisEvents = this.events;
-          // debugger
           let relevantEvent
           relevantEvent = thisEvents.filter(event => event.id == response.event_id)[0]
           relevantEvent.issues.push(new Issue(response));
@@ -68,8 +76,7 @@ class Events {
             relatedEventHTML.appendChild(ul);
           } else {
             relatedEventHTML
-              .getElementsByTagName('ul')[0]
-              .appendChild(newIssueNode);
+              .getElementsByTagName('ul')[0].appendChild(newIssueNode);
           }
         }.bind(this)
       );
@@ -116,10 +123,12 @@ class Events {
       .map(event => event.renderLi)
       .join('');
     const dButtons = document.querySelectorAll('.delete');
+    const vButtons = document.querySelectorAll('.view')
     for (const button of dButtons) {
       button.addEventListener(
         'click',
         function(e) {
+          
           let eventID = e.target.id;
           this.adapter.deleteEvent(eventID);
           this.events = this.events.filter(event => event.id != e.target.id)
@@ -130,7 +139,18 @@ class Events {
         }.bind(this)
       );
     }
+
+    for (const button of vButtons) {
+      button.addEventListener(
+        'click',
+        function(e) {
+          let eventID = e.target.id;
+          this.showEvent(eventID);
+        }.bind(this)
+      );
+    }
   }
+
 
   reRender() {
     this.eventsContainer.innerHTML = this.events
