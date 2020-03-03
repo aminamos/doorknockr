@@ -2,6 +2,13 @@
 
 This application was created for a project assigned as part of my studies with [Flatiron School](https://flatironschool.com/). It's a simple app that political campaigns could use to create canvassing (doorknocking) events, and associated issues/topics for those events.
 
+## Built With
+
+* [Rails](https://rubyonrails.org/) - The web framework used
+* [Vanilla JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Resources) - Used to generate RSS Feeds
+* [Prettier](https://prettier.io/) - Dependency Management
+* [Devise](https://github.com/heartcombo/devise) - User authentication
+
 ### Installation
 
 Clone the repository using https or ssh
@@ -35,13 +42,6 @@ localhost:3000/events
 - postgresql
 - node
 - npm
-
-## Built With
-
-* [Rails](https://rubyonrails.org/) - The web framework used
-* [Vanilla JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Resources) - Used to generate RSS Feeds
-* [Prettier](https://prettier.io/) - Dependency Management
-* [Devise](https://github.com/heartcombo/devise) - User authentication
 
 ## Contributing
 
